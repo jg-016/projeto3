@@ -1,0 +1,15 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Editar Categoria - Loja{% endblock %}
+
+{% block content %}
+  <h1>Editar Categoria</h1>
+  <form method="post" action="{% url 'categoria_edit' categoria.id %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Nome</label>
+      <input class="form-control" name="categoria" value="{{ categoria.categoria }}">
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+  </form>
+{% endblock %}

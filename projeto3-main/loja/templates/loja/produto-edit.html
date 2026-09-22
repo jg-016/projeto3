@@ -1,0 +1,64 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Editar Produto{% endblock %}
+
+{% block content %}
+  <h1>Editar Produto</h1>
+  <form method="post" action="{% url 'produto_edit_post' produto.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ produto.id }}">
+
+    <div class="mb-3">
+      <label class="form-label">Produto</label>
+      <input class="form-control" name="produto" value="{{ produto.produto }}">
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="destaque" id="destaque" {% if produto.destaque %}checked{% endif %}>
+      <label class="form-check-label" for="destaque">Destaque</label>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="promocao" id="promocao" {% if produto.promocao %}checked{% endif %}>
+      <label class="form-check-label" for="promocao">Promoção</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Mensagem Promoção</label>
+      <input class="form-control" name="msgPromocao" value="{{ produto.msgPromocao }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Preço</label>
+      <input class="form-control" name="preco" value="{{ produto.preco }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Imagem</label>
+      <input class="form-control" type="file" name="image">
+      {% if produto.imagem %}
+        <div class="mt-2"><img src="{{ produto.imagem.url }}" style="max-height:120px;"></div>
+      {% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Categoria</label>
+      <select class="form-select" name="CategoriaFk">
+        {% for c in categorias %}
+          <option value="{{ c.id }}" {% if produto.categoria.id == c.id %}selected{% endif %}>{{ c.categoria }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fabricante</label>
+      <select class="form-select" name="FabricanteFk">
+        {% for f in fabricantes %}
+          <option value="{{ f.id }}" {% if produto.fabricante.id == f.id %}selected{% endif %}>{{ f.fabricante }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button class="btn btn-primary">Salvar</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Novo Produto{% endblock %}
+
+{% block content %}
+  <h1>Novo Produto</h1>
+  <form method="post" action="{% url 'create_produto' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label">Produto</label>
+      <input class="form-control" name="produto" value="">
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="destaque" id="destaque">
+      <label class="form-check-label" for="destaque">Destaque</label>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="promocao" id="promocao">
+      <label class="form-check-label" for="promocao">Promoção</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Mensagem Promoção</label>
+      <input class="form-control" name="msgPromocao" value="">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Preço</label>
+      <input class="form-control" name="preco" value="">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Imagem</label>
+      <input class="form-control" type="file" name="image">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Categoria</label>
+      <select class="form-select" name="CategoriaFk">
+        {% for c in categorias %}
+          <option value="{{ c.id }}">{{ c.categoria }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fabricante</label>
+      <select class="form-select" name="FabricanteFk">
+        {% for f in fabricantes %}
+          <option value="{{ f.id }}">{{ f.fabricante }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button class="btn btn-success">Inserir</button>
+  </form>
+{% endblock %}

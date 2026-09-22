@@ -1,0 +1,18 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Editar Fabricante - Loja{% endblock %}
+
+{% block content %}
+  <h1>Editar Fabricante</h1>
+  <form method="post" action="{% url 'fabricante_edit' fabricante.id %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Fabricante</label>
+      {{ form.fabricante }}
+      {% for error in form.fabricante.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Novo Fabricante - Loja{% endblock %}
+
+{% block content %}
+  <h1>Novo Fabricante</h1>
+  <form method="post" action="{% url 'fabricante_create' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Fabricante</label>
+      {{ form.fabricante }}
+      {% for error in form.fabricante.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <button class="btn btn-success">Inserir</button>
+  </form>
+{% endblock %}

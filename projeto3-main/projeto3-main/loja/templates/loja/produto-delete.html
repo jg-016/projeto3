@@ -1,0 +1,43 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Excluir Produto{% endblock %}
+
+{% block content %}
+  <h1>Excluir Produto</h1>
+  <form method="post" action="{% url 'produto_delete' produto.id %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label">Produto</label>
+      <input class="form-control" value="{{ produto.produto }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Categoria</label>
+      <select class="form-select" disabled>
+        {% for c in categorias %}
+          <option value="{{ c.id }}" {% if produto.categoria.id == c.id %}selected{% endif %}>{{ c.categoria }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fabricante</label>
+      <select class="form-select" disabled>
+        {% for f in fabricantes %}
+          <option value="{{ f.id }}" {% if produto.fabricante.id == f.id %}selected{% endif %}>{{ f.fabricante }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    {% if produto.imagem %}
+      <div class="mb-3">
+        <label class="form-label">Imagem</label>
+        <div><img src="{{ produto.imagem.url }}" style="max-height:240px;"></div>
+      </div>
+    {% endif %}
+
+    <button class="btn btn-danger">Confirmar Exclusão</button>
+    <a class="btn btn-secondary" href="{% url 'produto_list' %}">Retornar</a>
+  </form>
+{% endblock %}

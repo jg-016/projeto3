@@ -1,0 +1,11 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Home - Loja{% endblock %}
+
+{% block content %}
+  <h1>Home</h1>
+  <p><a class="btn btn-primary" href="{% url 'home' %}">Voltar</a></p>
+  <form method="get" action="{% url 'home' %}">
+    <input class="form-control" name="q" placeholder="Pesquisar...">
+  </form>
+{% endblock %}
