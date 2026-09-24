@@ -27,6 +27,7 @@
           <a class="btn btn-sm btn-success" href="{% url 'create_carrinhoitem' p.id %}">
             <i class="fa fa-plus"></i> Comprar
           </a>
+          <a class="btn btn-sm btn-warning" href="{% url 'favoritar_produto' p.id %}">Favoritar</a>
           <a class="btn btn-sm btn-primary" href="{% url 'produto_detail' p.id %}">Ver</a>
           <a class="btn btn-sm btn-warning" href="{% url 'produto_edit' p.id %}">Editar</a>
           <a class="btn btn-sm btn-danger" href="{% url 'produto_delete' p.id %}">Excluir</a>

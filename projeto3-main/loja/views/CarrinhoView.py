@@ -60,11 +60,35 @@ def confirmar_carrinho_view(request):
     carrinho.confirmado_em = timezone.now()
     carrinho.save(update_fields=['user', 'situacao', 'confirmado_em'])
 
+    itens = CarrinhoItem.objects.filter(carrinho=carrinho)
+
     return render(
         request,
         'carrinho/carrinho-confirmado.html',
-        {'carrinho': carrinho},
+        {'carrinho': carrinho, 'itens': itens},
     )
+
+
+def adicionar_quantidade_view(request, item_id):
+    item = get_object_or_404(CarrinhoItem, id=item_id)
+    carrinho_id = request.session.get('carrinho_id')
+
+    if str(carrinho_id) == str(item.carrinho_id):
+        item.quantidade += 1
+        item.save(update_fields=['quantidade'])
+
+    return redirect('list_carrinho')
+
+
+def diminuir_quantidade_view(request, item_id):
+    item = get_object_or_404(CarrinhoItem, id=item_id)
+    carrinho_id = request.session.get('carrinho_id')
+
+    if str(carrinho_id) == str(item.carrinho_id) and item.quantidade > 1:
+        item.quantidade -= 1
+        item.save(update_fields=['quantidade'])
+
+    return redirect('list_carrinho')
 
 
 @require_POST

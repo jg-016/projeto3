@@ -1,0 +1,25 @@
+{% extends 'loja/base.html' %}
+
+{% block title %}Favoritos{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>Produtos Favoritos</h3>
+
+  {% if favoritos %}
+    {% for favorito in favoritos %}
+      <div class="row border-bottom py-2 align-items-center">
+        <div class="col-md-4">{{ favorito.produto.produto }}</div>
+        <div class="col-md-3">R$ {{ favorito.produto.preco|floatformat:2 }}</div>
+        <div class="col-md-3">
+          <a href="{% url 'create_carrinhoitem' favorito.produto.id %}" class="btn btn-primary btn-sm">Comprar</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Você ainda não possui produtos favoritos.</p>
+  {% endif %}
+
+  <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Voltar à loja</a>
+</div>
+{% endblock %}

@@ -26,7 +26,10 @@ from .CarrinhoView import (
 	list_carrinho_view,
 	confirmar_carrinho_view,
 	remover_item_view,
+	adicionar_quantidade_view,
+	diminuir_quantidade_view,
 )
+from .FavoritoView import favoritar_produto_view, listar_favoritos_view
 
 __all__ = [
 	'home_view',
@@ -53,4 +56,8 @@ __all__ = [
 	'list_carrinho_view',
 	'confirmar_carrinho_view',
 	'remover_item_view',
+	'adicionar_quantidade_view',
+	'diminuir_quantidade_view',
+	'favoritar_produto_view',
+	'listar_favoritos_view',
 ]

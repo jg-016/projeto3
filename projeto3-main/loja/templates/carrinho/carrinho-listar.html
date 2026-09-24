@@ -20,7 +20,11 @@
     {% for item in itens %}
       <div class="row align-items-center py-2 border-bottom">
         <div class="col-md-3">{{ item.produto.produto }}</div>
-        <div class="col-md-2">{{ item.quantidade }}</div>
+        <div class="col-md-2">
+          <a href="{% url 'diminuir_quantidade' item.id %}" class="btn btn-secondary btn-sm">-</a>
+          {{ item.quantidade }}
+          <a href="{% url 'adicionar_quantidade' item.id %}" class="btn btn-primary btn-sm">+</a>
+        </div>
         <div class="col-md-2">R$ {{ item.preco|floatformat:2 }}</div>
         <div class="col-md-2">R$ {{ item.total|floatformat:2 }}</div>
         <div class="col-md-3">

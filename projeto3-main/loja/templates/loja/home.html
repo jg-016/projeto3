@@ -4,6 +4,9 @@
 
 {% block content %}
   <h1>Home</h1>
+  {% if user.is_authenticated %}
+    <p><a class="btn btn-primary" href="{% url 'listar_favoritos' %}">Meus Favoritos</a></p>
+  {% endif %}
   <p><a class="btn btn-primary" href="{% url 'home' %}">Voltar</a></p>
   <form method="get" action="{% url 'home' %}">
     <input class="form-control" name="q" placeholder="Pesquisar...">
